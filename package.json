@@ -1,0 +1,36 @@
+{
+  "name": "react-google-maps",
+  "version": "1.0.0",
+  "description": "react google maps component",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nfort/react-google-maps.git"
+  },
+  "keywords": [
+    "react",
+    "google-maps",
+    "maps",
+    "google",
+    "component",
+    "map",
+    "maps"
+  ],
+  "author": "nfort",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nfort/react-google-maps/issues"
+  },
+  "homepage": "https://github.com/nfort/react-google-maps#readme",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "@babel/preset-react": "^7.0.0-beta.49",
+    "prettier": "^1.13.4"
+  }
+}
