@@ -4,6 +4,8 @@
   "description": "react google maps component",
   "main": "lib/index.js",
   "scripts": {
+    "build": "babel src -d lib",
+    "storybook": "start-storybook -p 9001 -c stories",
     "test": "jest"
   },
   "repository": {
@@ -26,11 +28,19 @@
   },
   "homepage": "https://github.com/nfort/react-google-maps#readme",
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.49",
     "@babel/core": "^7.0.0-beta.49",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
+    "@babel/plugin-transform-regenerator": "^7.0.0-beta.49",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.49",
     "@babel/preset-env": "^7.0.0-beta.49",
     "@babel/preset-react": "^7.0.0-beta.49",
-    "prettier": "^1.13.4"
+    "@storybook/react": "^3.4.6",
+    "babel-core": "^7.0.0-bridge.0",
+    "prettier": "^1.13.4",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   }
 }
