@@ -36,7 +36,7 @@ export default class Map extends PureComponent {
   }
 
   initializeMap = async () => {
-    let  { options } = this.props;
+    let { options } = this.props;
     await loadScriptGoogleMaps();
 
     if (isOptionsDoesntHaveLatLng(options)) {
