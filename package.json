@@ -4,7 +4,8 @@
   "description": "react google maps component",
   "main": "lib/index.js",
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "tsc --emitDeclarationOnly && babel src --out-dir lib --extensions \".ts,.tsx\"",
+    "type-check": "tsc --noEmit",
     "storybook": "start-storybook -p 9001 -c stories",
     "test": "jest"
   },
@@ -36,11 +37,22 @@
     "@babel/plugin-transform-runtime": "^7.0.0-beta.49",
     "@babel/preset-env": "^7.0.0-beta.49",
     "@babel/preset-react": "^7.0.0-beta.49",
-    "@storybook/react": "^3.4.6",
+    "@babel/preset-typescript": "^7.0.0-beta.49",
+    "@storybook/addon-info": "^3.4.6",
+    "@storybook/react": "^4.0.0-alpha.8",
+    "awesome-typescript-loader": "^5.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "prettier": "^1.13.4",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "react-dom": "^16.4.0",
+    "typescript": "^2.9.1"
+  },
+  "dependencies": {
+    "@types/googlemaps": "^3.30.9",
+    "@types/react": "^16.3.16",
+    "@types/react-dom": "^16.0.5",
+    "@types/storybook__react": "^3.0.7"
   }
 }

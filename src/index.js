@@ -1,3 +1,5 @@
-import Map from './Map';
+import Map from './Map/Map';
+import Marker from './Marker/Marker';
+import Polygone from './Polygon/Polygon';
 
-export { Map };
+export { Map, Marker, Polygone };
