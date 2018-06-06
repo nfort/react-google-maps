@@ -74,9 +74,12 @@ export default class Map extends React.Component<Props, State> {
         }}
       >
         {this.state.isInitializedMap
-          ? React.Children.map(this.props.children, (child) => {
+          ? React.Children.map(this.props.children, child => {
               if (React.isValidElement(child)) {
-                return React.cloneElement<State>(child as React.ReactElement<any>, { map: this.state.map });
+                return React.cloneElement<State>(
+                  child as React.ReactElement<any>,
+                  { map: this.state.map }
+                );
               }
             })
           : null}
