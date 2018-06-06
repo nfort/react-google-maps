@@ -5,16 +5,6 @@ import {
 } from "./utils/common";
 import { getGeocodeByAddress } from "./services/Geocoding";
 
-interface ContextMap {
-  map: null | google.maps.Map;
-  isInitializedMap: boolean;
-}
-
-const Context = React.createContext<ContextMap>({
-  map: null,
-  isInitializedMap: false
-});
-
 interface Props {
   city: string;
   options?: google.maps.MapOptions;
@@ -83,19 +73,13 @@ export default class Map extends React.Component<Props, State> {
           height: "90vh"
         }}
       >
-        <Context.Provider value={this.state}>
-          <Context.Consumer>
-            {context =>
-              this.state.isInitializedMap
-                ? React.Children.map(this.props.children, function(child) {
-                    if (React.isValidElement(child)) {
-                      return React.cloneElement(child, context);
-                    }
-                  })
-                : null
-            }
-          </Context.Consumer>
-        </Context.Provider>
+        {this.state.isInitializedMap
+          ? React.Children.map(this.props.children, (child) => {
+              if (React.isValidElement(child)) {
+                return React.cloneElement<State>(child as React.ReactElement<any>, { map: this.state.map });
+              }
+            })
+          : null}
       </div>
     );
   }
