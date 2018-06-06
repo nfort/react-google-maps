@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  loadScriptGoogleMaps,
-  isOptionsDoesntHaveLatLng
-} from "./utils/common";
-import { getGeocodeByAddress } from "./services/Geocoding";
+import { loadScriptGoogleMaps } from "./utils/common";
 
 interface Props {
-  city: string;
-  options?: google.maps.MapOptions;
+  options: google.maps.MapOptions;
   children?: React.ReactNode;
 }
 
@@ -18,14 +13,6 @@ interface State {
 
 export default class Map extends React.Component<Props, State> {
   private containerDiv: React.RefObject<HTMLDivElement>;
-
-  public static defaultProps: Partial<Props> = {
-    options: {
-      zoom: 10,
-      disableDefaultUI: true,
-      zoomControl: false
-    }
-  };
 
   constructor(props: Props) {
     super(props);
@@ -48,15 +35,6 @@ export default class Map extends React.Component<Props, State> {
     let { options } = this.props;
 
     await loadScriptGoogleMaps();
-
-    if (isOptionsDoesntHaveLatLng(options!)) {
-      const { city } = this.props;
-      const location = await getGeocodeByAddress(city);
-      options = {
-        ...options,
-        center: location
-      };
-    }
 
     this.setState({
       map: new google.maps.Map(this.containerDiv.current, options),

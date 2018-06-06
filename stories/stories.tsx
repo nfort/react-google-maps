@@ -4,10 +4,17 @@ import Map from "../src/Map/Map";
 import Marker from "../src/Marker/Marker";
 import Polygon from "../src/Polygon/Polygon";
 
+const optionsMap = {
+  center: { lat: 55.751244, lng: 37.618423 },
+  zoom: 10,
+  disableDefaultUI: true,
+  zoomControl: false
+};
+
 storiesOf("Map", module)
-  .add("default", () => <Map city="Moscow" />)
+  .add("default", () => <Map options={optionsMap} />)
   .add("with Markers", () => (
-    <Map city="Moscow">
+    <Map options={optionsMap}>
       <Marker
         options={{
           title: "Red Square",
@@ -50,16 +57,14 @@ storiesOf("Map", module)
       ];
 
       cbGetInstance = (polygon: google.maps.Polygon) => {
-        polygon
-          .getMap()
-          .addListener('click', (e) => {
-            polygon.setPath([ ...polygon.getPath().getArray(), e.latLng.toJSON()])
-        })
+        polygon.getMap().addListener("click", e => {
+          polygon.setPath([...polygon.getPath().getArray(), e.latLng.toJSON()]);
+        });
       };
 
       render() {
         return (
-          <Map city="Moscow">
+          <Map options={optionsMap}>
             <Polygon
               options={{
                 paths: this.paths,
@@ -75,5 +80,5 @@ storiesOf("Map", module)
         );
       }
     }
-    return <TestPolygon/>;
+    return <TestPolygon />;
   });
