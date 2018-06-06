@@ -1,5 +1,5 @@
 {
-  "name": "react-google-maps",
+  "name": "@nfort/react-google-maps",
   "version": "1.0.0",
   "description": "react google maps component",
   "main": "lib/index.js",
