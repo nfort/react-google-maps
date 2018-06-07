@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
 interface Props {
-  map?: google.maps.Map,
-  options: google.maps.PolygonOptions,
-  instance(polygon: google.maps.Polygon): void
+  map?: google.maps.Map;
+  options: google.maps.PolygonOptions;
+  instance(polygon: google.maps.Polygon): void;
 }
 
-export default class Polygon extends React.Component<Props>{
+export default class Polygon extends React.Component<Props> {
   setPolygon = () => {
     const { map, options, instance } = this.props;
     const polygon = new google.maps.Polygon(options);
@@ -16,10 +16,6 @@ export default class Polygon extends React.Component<Props>{
 
   componentDidMount() {
     this.setPolygon();
-  }
-
-  componentDidUpdate() {
-    //this.setPolygon();
   }
 
   render() {
