@@ -2,6 +2,7 @@ import React from "react";
 import { loadScriptGoogleMaps } from "./utils/common";
 
 interface Props {
+  height: string;
   options: google.maps.MapOptions;
   children?: React.ReactNode;
 }
@@ -12,6 +13,10 @@ interface State {
 }
 
 export default class Map extends React.Component<Props, State> {
+  public static defaultProps: Partial<Props> = {
+    height: "100%"
+  };
+
   private containerDiv: React.RefObject<HTMLDivElement>;
 
   constructor(props: Props) {
@@ -43,12 +48,13 @@ export default class Map extends React.Component<Props, State> {
   };
 
   render() {
+    const { height } = this.props;
     return (
       <div
         ref={this.containerDiv}
         style={{
-          width: "100vw",
-          height: "90vh"
+          width: "100%",
+          height
         }}
       >
         {this.state.isInitializedMap

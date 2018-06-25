@@ -12,9 +12,9 @@ const optionsMap = {
 };
 
 storiesOf("Map", module)
-  .add("default", () => <Map options={optionsMap} />)
+  .add("default", () => <Map height="600px" options={optionsMap} />)
   .add("with Markers", () => (
-    <Map options={optionsMap}>
+    <Map height="600px" options={optionsMap}>
       <Marker
         options={{
           title: "Red Square",
@@ -64,7 +64,7 @@ storiesOf("Map", module)
 
       render() {
         return (
-          <Map options={optionsMap}>
+          <Map height="600px" options={optionsMap}>
             <Polygon
               options={{
                 paths: this.paths,
