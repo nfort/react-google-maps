@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  map?: google.maps.Map;
+  map: google.maps.Map;
   options: google.maps.PolygonOptions;
   instance(polygon: google.maps.Polygon): void;
 }
@@ -40,6 +40,14 @@ export default class Polygon extends React.Component<Props, State> {
     }
 
     return true;
+  }
+
+  componentWillUnmount() {
+    const { polygon } = this.state;
+
+    if (polygon) {
+      polygon.setMap(null);
+    }
   }
 
   render() {

@@ -4,7 +4,7 @@ import { loadScriptGoogleMaps } from "./utils/common";
 interface Props {
   height: string;
   options: google.maps.MapOptions;
-  children?: React.ReactNode;
+  children?(map: google.maps.Map): React.ReactNode;
 }
 
 interface State {
@@ -58,14 +58,9 @@ export default class Map extends React.Component<Props, State> {
         }}
       >
         {this.state.isInitializedMap
-          ? React.Children.map(this.props.children, child => {
-              if (React.isValidElement(child)) {
-                return React.cloneElement<State>(
-                  child as React.ReactElement<any>,
-                  { map: this.state.map }
-                );
-              }
-            })
+          ? this.props.children
+            ? this.props.children(this.state.map!)
+            : null
           : null}
       </div>
     );
