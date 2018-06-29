@@ -5,6 +5,8 @@ import Marker from "../src/Marker/Marker";
 import Polygon from "../src/Polygon/Polygon";
 import DrawingManager from "../src/DrawingManager/DrawingManager";
 
+const GOOGLE_MAPS_KEY = "AIzaSyDbTuK4yijUzrJjTh852cEQuN5LN35FeYo";
+
 const optionsMap = {
   center: { lat: 55.751244, lng: 37.618423 },
   zoom: 10,
@@ -13,9 +15,11 @@ const optionsMap = {
 };
 
 storiesOf("Map", module)
-  .add("default", () => <Map height="600px" options={optionsMap} />)
+  .add("default", () => (
+    <Map APIKey={GOOGLE_MAPS_KEY} height="600px" options={optionsMap} />
+  ))
   .add("with Markers", () => (
-    <Map height="600px" options={optionsMap}>
+    <Map APIKey={GOOGLE_MAPS_KEY} height="600px" options={optionsMap}>
       {map => (
         <React.Fragment>
           <Marker
@@ -74,7 +78,7 @@ storiesOf("Map", module)
 
       render() {
         return (
-          <Map height="600px" options={optionsMap}>
+          <Map APIKey={GOOGLE_MAPS_KEY} height="600px" options={optionsMap}>
             {map => (
               <Polygon
                 map={map}
@@ -103,7 +107,7 @@ storiesOf("Map", module)
 
       render() {
         return (
-          <Map height="600px" options={optionsMap}>
+          <Map APIKey={GOOGLE_MAPS_KEY} height="600px" options={optionsMap}>
             {map => (
               <DrawingManager
                 map={map}

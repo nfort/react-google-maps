@@ -1,16 +1,17 @@
-const GOOGLE_MAPS_KEY = "AIzaSyDbTuK4yijUzrJjTh852cEQuN5LN35FeYo";
-const URL_GOOGLE_MAPS_SCRIPT = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_KEY}&libraries=drawing`;
-
 declare global {
   interface Window {
     google: object;
   }
 }
 
-export function loadScriptGoogleMaps() {
+function getGoogleMapsUrl(key: string) {
+  return `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=drawing`;
+}
+
+export function loadScriptGoogleMaps(key: string) {
   function appendScript(): HTMLElement {
     const script = document.createElement("script");
-    script.setAttribute("src", URL_GOOGLE_MAPS_SCRIPT);
+    script.setAttribute("src", getGoogleMapsUrl(key));
     document.head.appendChild(script);
     return script;
   }

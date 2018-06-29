@@ -3,6 +3,7 @@ import { loadScriptGoogleMaps } from "./utils/common";
 
 interface Props {
   height: string;
+  APIKey: string;
   options: google.maps.MapOptions;
   children?(map: google.maps.Map): React.ReactNode;
 }
@@ -37,9 +38,9 @@ export default class Map extends React.Component<Props, State> {
   }
 
   initializeMap = async () => {
-    let { options } = this.props;
+    let { options, APIKey } = this.props;
 
-    await loadScriptGoogleMaps();
+    await loadScriptGoogleMaps(APIKey);
 
     this.setState({
       map: new google.maps.Map(this.containerDiv.current, options),
