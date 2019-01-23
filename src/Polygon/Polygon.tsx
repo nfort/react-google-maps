@@ -50,7 +50,7 @@ export default class Polygon extends React.Component<Props, State> {
     }
   }
 
-  render() {
+  render(): null {
     return null;
   }
 }

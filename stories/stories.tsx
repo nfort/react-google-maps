@@ -14,6 +14,22 @@ const optionsMap = {
   zoomControl: false
 };
 
+// Implementation code where T is the returned data shape
+function api<T>(url: string): Promise<T> {
+  return fetch(url).then(response => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.json().then(data => data as T);
+  });
+}
+
+function randomInteger(min: number, max: number) {
+  let rand = min - 0.5 + Math.random() * (max - min + 1);
+  rand = Math.round(rand);
+  return rand;
+}
+
 storiesOf("Map", module)
   .add("default", () => (
     <Map APIKey={GOOGLE_MAPS_KEY} height="600px" options={optionsMap} />
@@ -97,6 +113,7 @@ storiesOf("Map", module)
         );
       }
     }
+
     return <TestPolygon />;
   })
   .add("drawingManager", () => {
@@ -123,4 +140,91 @@ storiesOf("Map", module)
     }
 
     return <TestDrawingManager />;
+  })
+  .add("line metro", () => {
+    interface Station {
+      id: string;
+      name: string;
+      lat: number;
+      lng: number;
+      order: number;
+    }
+
+    interface Line {
+      id: string;
+      hex_color: string;
+      name: string;
+      stations: Station[];
+    }
+
+    interface MetroJson {
+      id: string;
+      name: string;
+      lines: Line[];
+    }
+
+    class LineMetro extends React.Component<{}, { metro: null | MetroJson }> {
+      constructor(props: any) {
+        super(props);
+        this.state = {
+          metro: null
+        };
+      }
+
+      componentDidMount(): void {
+        api<MetroJson>("https://api.hh.ru/metro/1").then(res => {
+          this.setState({ metro: res });
+          res.lines.map(item =>
+            item.stations.map(station => console.log(`[${station.name}],`))
+          );
+        });
+      }
+
+      static getIcon(color: string, line: string) {
+        const colors = ["FF0000", "00FF00", "0000FF"];
+        const _color = colors[randomInteger(0, 2)];
+
+        return `https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=${line[0].toUpperCase()}|${_color}|FFFF00`;
+      }
+
+      render(): React.ReactNode {
+        const { metro } = this.state;
+
+        if (!metro) return null;
+
+        return (
+          <Map APIKey={GOOGLE_MAPS_KEY} height="600px" options={optionsMap}>
+            {map => {
+              const transitLayer = new google.maps.TransitLayer();
+              transitLayer.setMap(map);
+
+              return metro.lines.map(function(line) {
+                return line.stations.map(function(station) {
+                  return (
+                    <Marker
+                      map={map}
+                      options={{
+                        title: line.name,
+                        icon: {
+                          path: google.maps.SymbolPath.CIRCLE,
+                          fillColor: "#00F",
+                          fillOpacity: 0.6,
+                          strokeColor: "#00A",
+                          strokeOpacity: 0.9,
+                          strokeWeight: 1,
+                          scale: 7
+                        },
+                        position: { lat: station.lat, lng: station.lng }
+                      }}
+                    />
+                  );
+                });
+              });
+            }}
+          </Map>
+        );
+      }
+    }
+
+    return <LineMetro />;
   });

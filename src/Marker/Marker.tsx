@@ -38,7 +38,7 @@ export default class Marker extends React.Component<Props, State> {
     }
   }
 
-  render() {
+  render(): null {
     return null;
   }
 }

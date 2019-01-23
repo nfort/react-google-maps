@@ -50,7 +50,7 @@ export default class DrawingManager extends React.Component<Props, State> {
     }
   }
 
-  render() {
+  render(): null {
     return null;
   }
 }
